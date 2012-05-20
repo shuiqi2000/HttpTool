@@ -2,6 +2,7 @@ package com.feima;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -58,6 +59,18 @@ public class Http {
 			e.printStackTrace();
 			return null;
 		} 
+	}
+	
+	public static String getContent(String urlString){
+		HttpResponse response= get(urlString);
+		byte [] data = response.getContent();
+		try {
+			return new String(data, "gbk");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	/**
 	 * @param args
